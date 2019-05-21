@@ -1,4 +1,4 @@
-package org.abimon.diskord
+package org.abimon.diskord.extensions
 
 import discordgamesdk.DiscordActivity
 import discordgamesdk.DiscordActivityAssets
