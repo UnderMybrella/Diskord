@@ -20,7 +20,7 @@ class DiscordActivityBuilder {
 
     var largeImageKey: String? by structProperty(activity::assets, DiscordActivityAssets::largeImageAsString)
     var largeImageText: String? by structProperty(activity::assets, DiscordActivityAssets::largeTextAsString)
-    var smallImageKey: String? by structProperty(activity::assets, DiscordActivityAssets::largeImageAsString)
+    var smallImageKey: String? by structProperty(activity::assets, DiscordActivityAssets::smallImageAsString)
     var smallImageText: String? by structProperty(activity::assets, DiscordActivityAssets::smallTextAsString)
 
     var partyId: String? by structProperty(activity::party, DiscordActivityParty::idAsString)
