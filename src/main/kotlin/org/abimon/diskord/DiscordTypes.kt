@@ -51,31 +51,31 @@ val DISCORD_INPUT_SHORTCUT_LENGTH = 256
 
 /** Events */
 
-typealias CurrentUserUpdateHandler=(core: IDiscordCore) -> Unit
+typealias CurrentUserUpdateHandler=suspend (core: IDiscordCore) -> Unit
 
-typealias ActivityJoinHandler=(core: IDiscordCore, secret: String) -> Unit
-typealias ActivitySpectateHandler=(core: IDiscordCore, secret: String) -> Unit
-typealias ActivityJoinRequestHandler=(core: IDiscordCore, user: DiscordUser) -> Unit
-typealias ActivityInviteHandler=(core: IDiscordCore, type: Int, user: DiscordUser, activity: DiscordActivity) -> Unit
+typealias ActivityJoinHandler=suspend (core: IDiscordCore, secret: String) -> Unit
+typealias ActivitySpectateHandler=suspend (core: IDiscordCore, secret: String) -> Unit
+typealias ActivityJoinRequestHandler=suspend (core: IDiscordCore, user: DiscordUser) -> Unit
+typealias ActivityInviteHandler=suspend (core: IDiscordCore, type: Int, user: DiscordUser, activity: DiscordActivity) -> Unit
 
-typealias RelationshipRefreshHandler=(core: IDiscordCore) -> Unit
-typealias RelationshipUpdateHandler=(core: IDiscordCore, relationship: DiscordRelationship) -> Unit
+typealias RelationshipRefreshHandler=suspend (core: IDiscordCore) -> Unit
+typealias RelationshipUpdateHandler=suspend (core: IDiscordCore, relationship: DiscordRelationship) -> Unit
 
-typealias LobbyUpdateHandler=(core: IDiscordCore, lobbyId: DiscordLobbyId) -> Unit
-typealias LobbyDeleteHandler=(core: IDiscordCore, lobbyId: DiscordLobbyId, reason: Int) -> Unit
-typealias LobbyMemberConnectHandler=(core: IDiscordCore, lobbyId: DiscordLobbyId, userId: DiscordUserId) -> Unit
-typealias LobbyMemberUpdateHandler=(core: IDiscordCore, lobbyId: DiscordLobbyId, userId: DiscordUserId) -> Unit
-typealias LobbyMemberDisconnectHandler=(core: IDiscordCore, lobbyId: DiscordLobbyId, userId: DiscordUserId) -> Unit
-typealias LobbyMemberMessageHandler=(core: IDiscordCore, lobbyId: Long, userId: Long, data: ByteArray) -> Unit
-typealias LobbyMemberSpeakingHandler=(core: IDiscordCore, lobbyId: Long, userId: Long, speaking: Boolean) -> Unit
-typealias LobbyNetworkMessageHandler=(core: IDiscordCore, lobbyId: Long, userId: Long, channelId: Int, data: ByteArray) -> Unit
+typealias LobbyUpdateHandler=suspend (core: IDiscordCore, lobbyId: DiscordLobbyId) -> Unit
+typealias LobbyDeleteHandler=suspend (core: IDiscordCore, lobbyId: DiscordLobbyId, reason: Int) -> Unit
+typealias LobbyMemberConnectHandler=suspend (core: IDiscordCore, lobbyId: DiscordLobbyId, userId: DiscordUserId) -> Unit
+typealias LobbyMemberUpdateHandler=suspend (core: IDiscordCore, lobbyId: DiscordLobbyId, userId: DiscordUserId) -> Unit
+typealias LobbyMemberDisconnectHandler=suspend (core: IDiscordCore, lobbyId: DiscordLobbyId, userId: DiscordUserId) -> Unit
+typealias LobbyMemberMessageHandler=suspend (core: IDiscordCore, lobbyId: Long, userId: Long, data: ByteArray) -> Unit
+typealias LobbyMemberSpeakingHandler=suspend (core: IDiscordCore, lobbyId: Long, userId: Long, speaking: Boolean) -> Unit
+typealias LobbyNetworkMessageHandler=suspend (core: IDiscordCore, lobbyId: Long, userId: Long, channelId: Int, data: ByteArray) -> Unit
 
-typealias NetworkOnMessageHandler=(core: IDiscordCore, peerId: DiscordNetworkPeerId, channelId: DiscordNetworkChannelId, data: ByteArray) -> Unit
-typealias NetworkRouteUpdateHandler=(core: IDiscordCore, route: String) -> Unit
+typealias NetworkOnMessageHandler=suspend (core: IDiscordCore, peerId: DiscordNetworkPeerId, channelId: DiscordNetworkChannelId, data: ByteArray) -> Unit
+typealias NetworkRouteUpdateHandler=suspend (core: IDiscordCore, route: String) -> Unit
 
-typealias OverlayToggleHandler=(core: IDiscordCore, locked: Boolean) -> Unit
+typealias OverlayToggleHandler=suspend (core: IDiscordCore, locked: Boolean) -> Unit
 
-typealias StoreEntitlementCreateHandler=(core: IDiscordCore, entitlement: DiscordEntitlement) -> Unit
-typealias StoreEntitlementDeleteHandler=(core: IDiscordCore, entitlement: DiscordEntitlement) -> Unit
+typealias StoreEntitlementCreateHandler=suspend (core: IDiscordCore, entitlement: DiscordEntitlement) -> Unit
+typealias StoreEntitlementDeleteHandler=suspend (core: IDiscordCore, entitlement: DiscordEntitlement) -> Unit
 
-typealias AchievementUpdateHandler=(core: IDiscordCore, userAchievement: DiscordUserAchievement) -> Unit
+typealias AchievementUpdateHandler=suspend (core: IDiscordCore, userAchievement: DiscordUserAchievement) -> Unit
