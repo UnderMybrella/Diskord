@@ -6,6 +6,8 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withTimeoutOrNull
 import org.abimon.diskord.*
+import org.abimon.diskord.builders.DiscordActivityBuilder
+import org.abimon.diskord.builders.buildActivity
 import kotlin.coroutines.resume
 
 fun IDiscordActivityManager.registerCommand(command: String) {
@@ -24,11 +26,13 @@ fun IDiscordActivityManager.updateActivity(activity: DiscordActivity, callback: 
         update_activity.apply(this, activity, ptr) { callbackData, result -> callback(IDiscordActivityManager(callbackData), result) }
     }
 }
-suspend fun IDiscordActivityManager.updateActivityAwait(activity: DiscordActivity, timeout: Long = Diskord.DEFAULT_TIMEOUT): Int? =
-        withTimeoutOrNull(timeout) {
-            suspendCancellableCoroutine<Int> { coroutine -> updateActivity(activity) { _, result -> coroutine.resume(result) } }
-        }
-fun IDiscordActivityManager.updateActivityBlock(activity: DiscordActivity, timeout: Long = Diskord.DEFAULT_TIMEOUT): Int? = runBlocking { updateActivityAwait(activity, timeout) }
+fun IDiscordActivityManager.updateActivityBlock(activity: DiscordActivity, timeout: Long = Diskord.DEFAULT_TIMEOUT): DiscordResult<Unit> = runBlocking { updateActivityAwait(activity, timeout) }
+suspend fun IDiscordActivityManager.updateActivityAwait(activity: DiscordActivity, timeout: Long = Diskord.DEFAULT_TIMEOUT): DiscordResult<Unit> =
+    awaitDiscordResult(timeout) { coroutine -> updateActivity(activity) { _, result -> coroutine.resume(DiscordResult(result)) } }
+fun IDiscordActivityManager.updateActivityBlock(timeout: Long = Diskord.DEFAULT_TIMEOUT, init: DiscordActivityBuilder.() -> Unit): DiscordResult<Unit> = runBlocking { updateActivityAwait(timeout, init) }
+suspend fun IDiscordActivityManager.updateActivityAwait(timeout: Long = Diskord.DEFAULT_TIMEOUT, init: DiscordActivityBuilder.() -> Unit): DiscordResult<Unit> =
+    awaitDiscordResult(timeout) { coroutine -> updateActivity(buildActivity(init)) { _, result -> coroutine.resume(DiscordResult(result)) } }
+
 
 fun IDiscordActivityManager.clearActivity(callback: (activityManager: IDiscordActivityManager, result: Int) -> Unit) {
     scopedPointer { ptr ->
