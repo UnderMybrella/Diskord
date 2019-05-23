@@ -42,6 +42,7 @@ task sourcesJar(type: Jar, dependsOn: classes) {
     appendix = jar.appendix
     version = jar.version
     from sourceSets.main.java
+    from sourceSets.main.kotlin
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
