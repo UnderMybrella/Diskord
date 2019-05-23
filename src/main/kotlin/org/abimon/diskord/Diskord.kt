@@ -3,7 +3,6 @@ package org.abimon.diskord
 import discordgamesdk.DiscordCreateParams
 import discordgamesdk.DiscordGameSDKLibrary
 import discordgamesdk.DiscordGameSDKLibrary.EDiscordCreateFlags.DiscordCreateFlags_Default
-import discordgamesdk.DiscordUser
 import discordgamesdk.IDiscordCore
 import kotlinx.coroutines.*
 import org.abimon.diskord.extensions.*
@@ -48,14 +47,14 @@ fun createSDK(paramInit: DiscordCreateParams.(DiscordCoreRef) -> Unit): IDiscord
                             "FailResult"
                         )})"
                     )
-                core.lobbyManager.flushNetwork()
-                    .orElse { failRes ->
-                        System.err.println(
-                            "Flush failed (${failRes::class.java.simpleName.substringAfter(
-                                "FailResult"
-                            )}"
-                        )
-                    }
+//                core.lobbyManager.flushNetwork()
+//                    .orElse { failRes ->
+//                        System.err.println(
+//                            "Flush failed (${failRes::class.java.simpleName.substringAfter(
+//                                "FailResult"
+//                            )}"
+//                        )
+//                    }
             }
         }
     }
