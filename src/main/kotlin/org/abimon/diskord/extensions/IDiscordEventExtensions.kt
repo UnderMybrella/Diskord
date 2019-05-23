@@ -23,7 +23,7 @@ var DiscordCreateParams.achievementEvents by DiscordCreateParams::achievement_ev
 
 var IDiscordUserEvents.onCurrentUserUpdate by IDiscordUserEvents::on_current_user_update
 
-fun IDiscordUserEvents.onCurrentUserUpdate(callback: (eventData: Pointer) -> Unit) =
+fun IDiscordUserEvents.onCurrentUserUpdate(callback: (eventData: Pointer?) -> Unit) =
         IDiscordUserEvents.on_current_user_update_callback(callback)
 
 fun userEvents(init: IDiscordUserEvents.ByReference.() -> Unit): IDiscordUserEvents.ByReference {
@@ -37,16 +37,16 @@ var IDiscordActivityEvents.onActivitySpectate by IDiscordActivityEvents::on_acti
 var IDiscordActivityEvents.onActivityJoinRequest by IDiscordActivityEvents::on_activity_join_request
 var IDiscordActivityEvents.onActivityInvite by IDiscordActivityEvents::on_activity_invite
 
-fun IDiscordActivityEvents.onActivityJoin(callback: (eventData: Pointer, secret: Pointer) -> Unit) =
+fun IDiscordActivityEvents.onActivityJoin(callback: (eventData: Pointer?, secret: Pointer) -> Unit) =
     IDiscordActivityEvents.on_activity_join_callback(callback)
 
-fun IDiscordActivityEvents.onActivitySpectate(callback: (eventData: Pointer, secret: Pointer) -> Unit) =
+fun IDiscordActivityEvents.onActivitySpectate(callback: (eventData: Pointer?, secret: Pointer) -> Unit) =
     IDiscordActivityEvents.on_activity_spectate_callback(callback)
 
-fun IDiscordActivityEvents.onActivityJoinRequest(callback: (eventData: Pointer, user: DiscordUser) -> Unit) =
+fun IDiscordActivityEvents.onActivityJoinRequest(callback: (eventData: Pointer?, user: DiscordUser) -> Unit) =
     IDiscordActivityEvents.on_activity_join_request_callback(callback)
 
-fun IDiscordActivityEvents.onActivityInvite(callback: (eventData: Pointer, type: Int, user: DiscordUser, activity: DiscordActivity) -> Unit) =
+fun IDiscordActivityEvents.onActivityInvite(callback: (eventData: Pointer?, type: Int, user: DiscordUser, activity: DiscordActivity) -> Unit) =
     IDiscordActivityEvents.on_activity_invite_callback(callback)
 
 fun activityEvents(init: IDiscordActivityEvents.ByReference.() -> Unit): IDiscordActivityEvents.ByReference {
@@ -58,10 +58,10 @@ fun activityEvents(init: IDiscordActivityEvents.ByReference.() -> Unit): IDiscor
 var IDiscordRelationshipEvents.onRefresh by IDiscordRelationshipEvents::on_refresh
 var IDiscordRelationshipEvents.onRelationshipUpdate by IDiscordRelationshipEvents::on_relationship_update
 
-fun IDiscordRelationshipEvents.onRefresh(callback: (eventData: Pointer) -> Unit) =
+fun IDiscordRelationshipEvents.onRefresh(callback: (eventData: Pointer?) -> Unit) =
     IDiscordRelationshipEvents.on_refresh_callback(callback)
 
-fun IDiscordRelationshipEvents.onRelationshipUpdate(callback: (eventData: Pointer, relationship: DiscordRelationship) -> Unit) =
+fun IDiscordRelationshipEvents.onRelationshipUpdate(callback: (eventData: Pointer?, relationship: DiscordRelationship) -> Unit) =
     IDiscordRelationshipEvents.on_relationship_update_callback(callback)
 
 fun relationshipEvents(init: IDiscordRelationshipEvents.ByReference.() -> Unit): IDiscordRelationshipEvents.ByReference {
@@ -79,28 +79,28 @@ var IDiscordLobbyEvents.onLobbyMessage by IDiscordLobbyEvents::on_lobby_message
 var IDiscordLobbyEvents.onSpeaking by IDiscordLobbyEvents::on_speaking
 var IDiscordLobbyEvents.onNetworkMessage by IDiscordLobbyEvents::on_network_message
 
-fun IDiscordLobbyEvents.onLobbyUpdate(callback: (eventData: Pointer, lobbyId: DiscordLobbyId) -> Unit) =
+fun IDiscordLobbyEvents.onLobbyUpdate(callback: (eventData: Pointer?, lobbyId: DiscordLobbyId) -> Unit) =
     IDiscordLobbyEvents.on_lobby_update_callback(callback)
 
-fun IDiscordLobbyEvents.onLobbyDelete(callback: (eventData: Pointer, lobbyId: DiscordLobbyId, reason: Int) -> Unit) =
+fun IDiscordLobbyEvents.onLobbyDelete(callback: (eventData: Pointer?, lobbyId: DiscordLobbyId, reason: Int) -> Unit) =
     IDiscordLobbyEvents.on_lobby_delete_callback(callback)
 
-fun IDiscordLobbyEvents.onMemberConnect(callback: (eventData: Pointer, lobbyId: DiscordLobbyId, userId: DiscordUserId) -> Unit) =
+fun IDiscordLobbyEvents.onMemberConnect(callback: (eventData: Pointer?, lobbyId: DiscordLobbyId, userId: DiscordUserId) -> Unit) =
     IDiscordLobbyEvents.on_member_connect_callback(callback)
 
-fun IDiscordLobbyEvents.onMemberUpdate(callback: (eventData: Pointer, lobbyId: DiscordLobbyId, userId: DiscordUserId) -> Unit) =
+fun IDiscordLobbyEvents.onMemberUpdate(callback: (eventData: Pointer?, lobbyId: DiscordLobbyId, userId: DiscordUserId) -> Unit) =
     IDiscordLobbyEvents.on_member_update_callback(callback)
 
-fun IDiscordLobbyEvents.onMemberDisconnect(callback: (eventData: Pointer, lobbyId: DiscordLobbyId, userId: DiscordUserId) -> Unit) =
+fun IDiscordLobbyEvents.onMemberDisconnect(callback: (eventData: Pointer?, lobbyId: DiscordLobbyId, userId: DiscordUserId) -> Unit) =
     IDiscordLobbyEvents.on_member_disconnect_callback(callback)
 
-fun IDiscordLobbyEvents.onLobbyMessage(callback: (eventData: Pointer, lobbyId: DiscordLobbyId, userId: DiscordUserId, data: Pointer, dataLength: Int) -> Unit) =
+fun IDiscordLobbyEvents.onLobbyMessage(callback: (eventData: Pointer?, lobbyId: DiscordLobbyId, userId: DiscordUserId, data: Pointer, dataLength: Int) -> Unit) =
     IDiscordLobbyEvents.on_lobby_message_callback(callback)
 
-fun IDiscordLobbyEvents.onSpeaking(callback: (eventData: Pointer, lobbyId: DiscordLobbyId, userId: DiscordUserId, speaking: Byte) -> Unit) =
+fun IDiscordLobbyEvents.onSpeaking(callback: (eventData: Pointer?, lobbyId: DiscordLobbyId, userId: DiscordUserId, speaking: Byte) -> Unit) =
     IDiscordLobbyEvents.on_speaking_callback(callback)
 
-fun IDiscordLobbyEvents.onNetworkMessage(callback: (eventData: Pointer, lobbyId: DiscordLobbyId, userId: DiscordUserId, channelId: Byte, data: Pointer, dataLength: Int) -> Unit) =
+fun IDiscordLobbyEvents.onNetworkMessage(callback: (eventData: Pointer?, lobbyId: DiscordLobbyId, userId: DiscordUserId, channelId: Byte, data: Pointer, dataLength: Int) -> Unit) =
     IDiscordLobbyEvents.on_network_message_callback(callback)
 
 fun lobbyEvents(init: IDiscordLobbyEvents.ByReference.() -> Unit): IDiscordLobbyEvents.ByReference {
@@ -112,10 +112,10 @@ fun lobbyEvents(init: IDiscordLobbyEvents.ByReference.() -> Unit): IDiscordLobby
 var IDiscordNetworkEvents.onMessage by IDiscordNetworkEvents::on_message
 var IDiscordNetworkEvents.onRouteUpdate by IDiscordNetworkEvents::on_route_update
 
-fun IDiscordNetworkEvents.onMessage(callback: (eventData: Pointer, peerId: Long, channelId: Byte, data: Pointer, dataLength: Int) -> Unit) =
+fun IDiscordNetworkEvents.onMessage(callback: (eventData: Pointer?, peerId: Long, channelId: Byte, data: Pointer, dataLength: Int) -> Unit) =
     IDiscordNetworkEvents.on_message_callback(callback)
 
-fun IDiscordNetworkEvents.onRouteUpdate(callback: (eventData: Pointer, routeData: Pointer) -> Unit) =
+fun IDiscordNetworkEvents.onRouteUpdate(callback: (eventData: Pointer?, routeData: Pointer) -> Unit) =
     IDiscordNetworkEvents.on_route_update_callback(callback)
 
 fun networkEvents(init: IDiscordNetworkEvents.ByReference.() -> Unit): IDiscordNetworkEvents.ByReference {
@@ -126,7 +126,7 @@ fun networkEvents(init: IDiscordNetworkEvents.ByReference.() -> Unit): IDiscordN
 
 var IDiscordOverlayEvents.onToggle by IDiscordOverlayEvents::on_toggle
 
-fun IDiscordOverlayEvents.onToggle(callback: (eventData: Pointer, locked: Byte) -> Unit) =
+fun IDiscordOverlayEvents.onToggle(callback: (eventData: Pointer?, locked: Byte) -> Unit) =
     IDiscordOverlayEvents.on_toggle_callback(callback)
 
 fun overlayEvents(init: IDiscordOverlayEvents.ByReference.() -> Unit): IDiscordOverlayEvents.ByReference {
@@ -138,10 +138,10 @@ fun overlayEvents(init: IDiscordOverlayEvents.ByReference.() -> Unit): IDiscordO
 var IDiscordStoreEvents.onEntitlementCreate by IDiscordStoreEvents::on_entitlement_create
 var IDiscordStoreEvents.onEntitlementDelete by IDiscordStoreEvents::on_entitlement_delete
 
-fun IDiscordStoreEvents.onEntitlementCreate(callback: (eventData: Pointer, entitlement: DiscordEntitlement) -> Unit) =
+fun IDiscordStoreEvents.onEntitlementCreate(callback: (eventData: Pointer?, entitlement: DiscordEntitlement) -> Unit) =
     IDiscordStoreEvents.on_entitlement_create_callback(callback)
 
-fun IDiscordStoreEvents.onEntitlementDelete(callback: (eventData: Pointer, entitlement: DiscordEntitlement) -> Unit) =
+fun IDiscordStoreEvents.onEntitlementDelete(callback: (eventData: Pointer?, entitlement: DiscordEntitlement) -> Unit) =
     IDiscordStoreEvents.on_entitlement_delete_callback(callback)
 
 fun storeEvents(init: IDiscordStoreEvents.ByReference.() -> Unit): IDiscordStoreEvents.ByReference {
@@ -152,7 +152,7 @@ fun storeEvents(init: IDiscordStoreEvents.ByReference.() -> Unit): IDiscordStore
 
 var IDiscordVoiceEvents.onSettingsUpdate by IDiscordVoiceEvents::on_settings_update
 
-fun IDiscordVoiceEvents.onSettingsUpdate(callback: (eventData: Pointer) -> Unit) =
+fun IDiscordVoiceEvents.onSettingsUpdate(callback: (eventData: Pointer?) -> Unit) =
     IDiscordVoiceEvents.on_settings_update_callback(callback)
 
 fun voiceEvents(init: IDiscordVoiceEvents.ByReference.() -> Unit): IDiscordVoiceEvents.ByReference {
@@ -163,7 +163,7 @@ fun voiceEvents(init: IDiscordVoiceEvents.ByReference.() -> Unit): IDiscordVoice
 
 var IDiscordAchievementEvents.onUserAchievementUpdate by IDiscordAchievementEvents::on_user_achievement_update
 
-fun IDiscordAchievementEvents.onUserAchievementUpdate(callback: (eventData: Pointer, userAchievement: DiscordUserAchievement) -> Unit) =
+fun IDiscordAchievementEvents.onUserAchievementUpdate(callback: (eventData: Pointer?, userAchievement: DiscordUserAchievement) -> Unit) =
     IDiscordAchievementEvents.on_user_achievement_update_callback(callback)
 
 fun achievementEvents(init: IDiscordAchievementEvents.ByReference.() -> Unit): IDiscordAchievementEvents.ByReference {
