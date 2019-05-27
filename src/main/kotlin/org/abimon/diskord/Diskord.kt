@@ -23,7 +23,7 @@ class DiscordCoreRef {
         }
 }
 
-fun createSDK(paramInit: DiscordCreateParams.(DiscordCoreRef) -> Unit): IDiscordCore {
+fun createSDK(createJob: Boolean = true, paramInit: DiscordCreateParams.(DiscordCoreRef) -> Unit): IDiscordCore {
     val coreRef = DiscordCoreRef()
     val ptr = arrayOf(IDiscordCore.ByReference())
 
@@ -36,17 +36,22 @@ fun createSDK(paramInit: DiscordCreateParams.(DiscordCoreRef) -> Unit): IDiscord
     coreRef.core = ptr[0]
     val core = ptr[0]
 
-    GlobalScope.launch(Executors.newSingleThreadExecutor { Thread(it).apply { isDaemon = true } }.asCoroutineDispatcher()) {
-        launch {
-            while (isActive) {
-                delay(20)
-                val result = core.run_callbacks.apply(core)
-                if (result != DiscordGameSDKLibrary.EDiscordResult.DiscordResult_Ok)
-                    System.err.println(
-                        "Callback failed (${DiscordResult.FailResult<Int>(result)::class.java.simpleName.substringAfter(
-                            "FailResult"
-                        )})"
-                    )
+    if (createJob) {
+        GlobalScope.launch(Executors.newSingleThreadExecutor {
+            Thread(it).apply {
+                isDaemon = true
+            }
+        }.asCoroutineDispatcher()) {
+            launch {
+                while (isActive) {
+                    delay(20)
+                    val result = core.run_callbacks.apply(core)
+                    if (result != DiscordGameSDKLibrary.EDiscordResult.DiscordResult_Ok)
+                        System.err.println(
+                            "Callback failed (${DiscordResult.FailResult<Int>(result)::class.java.simpleName.substringAfter(
+                                "FailResult"
+                            )})"
+                        )
 //                core.lobbyManager.flushNetwork()
 //                    .orElse { failRes ->
 //                        System.err.println(
@@ -55,6 +60,7 @@ fun createSDK(paramInit: DiscordCreateParams.(DiscordCoreRef) -> Unit): IDiscord
 //                            )}"
 //                        )
 //                    }
+                }
             }
         }
     }
